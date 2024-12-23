@@ -1,6 +1,7 @@
 ﻿# UE5 Mod Example
 This project is a proof of concept for implementing modding support to an unreal engine project.
 This is by no means foolproof and meant as a POC. Type of modding may include custom assets, maps, and other assets. A good way to imagine it is like a DLC for your project. (As that is essentially what is happening)
+Project SDK can be found here: https://github.com/Ji-Rath/ModingExampleSDK
 
 # Creating a Mod
 - Open the SDK project (If you are really picky, it can just be a blank project)
