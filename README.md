@@ -22,3 +22,21 @@ Currently, if you have packaged a map into a .pak and already mounted it, you ca
 # Additional Notes
 - When creating a SDK of your project, consider leaving key blueprint files in the content folder so that modders may use them. Even better if you just give them the whole project.
 - There are some specific settings you must follow when packaging (Both the mod and main game). Consider watching this video to ensure you are packaging correctly: https://www.youtube.com/watch?v=ndHNdUSRpho
+- SDK Project **needs** to have **Share Material Shader Code** set to false in order for materials to work properly.
+# Planning
+- Experiment with game features plugin
+- Add examples which include spawning/replacing assets
+- Add UI to load/unload specific mods
+
+# Research Notes
+
+## Game Feature Modding
+- Using the Game Features plugin and placing mods in the exact path **{ProjectName}/Plugins/GameFeatures** makes things easier. This means you only have to mount the pak files in the plugin, register the mount point, and call **UGameFeaturesSubsystem::LoadAndActivateGameFeaturePlugin**.
+  - This is because the project SDK where the mod is packaged is following the same path.
+- Using the Game Features plugin to create modular plugins makes mounting much more difficult when not following the exact path. (For example, I want to place mods in **{ProjectName}/Extensions** rather than **{ProjectName}/Plugins/GameFeatures**). This is because when using **UGameFeaturesSubsystem::LoadAndActivateGameFeaturePlugin**, it tries to mount the plugin on its own. This results in the mount path being incorrect.
+  - To solve this issue, disable **ExplicitlyLoaded** in the mod's .uplugin file.
+  - Manually mount the plugin yourself. Then, mount the pak file, which will then take priority. Finally, call **UGameFeaturesSubsystem::LoadAndActivateGameFeaturePlugin**
+
+# Useful Sources
+https://forums.unrealengine.com/t/inside-unreal-modular-game-features/242614/3
+https://buckminsterfullerene02.github.io/dev-guide/ModSupport.html
