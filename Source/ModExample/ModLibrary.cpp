@@ -4,15 +4,41 @@
 #include "ModLibrary.h"
 
 #include "IPlatformFilePak.h"
-#include "HAL/FileManagerGeneric.h"
+#include "Interfaces/IPluginManager.h"
 
-TArray<FString> UModLibrary::GetAllMods()
+TArray<FString> UModLibrary::GetFilesRecursive(const FString& Path, const FString& files)
 {
 	TArray<FString> result;
-	FString path = FPaths::ProjectPluginsDir();
-	FString files = "*.pak";
-	IFileManager::Get().FindFilesRecursive(result, *path, *files, true,false);
+	IFileManager::Get().FindFilesRecursive(result, *Path, *files, true,false);
 	return result;
+}
+
+TArray<FString> UModLibrary::GetSubdirectories(const FString& Path)
+{
+	TArray<FString> result;
+	IFileManager::Get().FindFiles(result, *Path, false,true);
+	return result;
+}
+
+void UModLibrary::MountPlugin(const FString& Plugin)
+{
+	bool bMounted = IPluginManager::Get().MountExplicitlyLoadedPlugin(Plugin);
+	UE_LOG(LogTemp, Display, TEXT("Mounted Plugin: %s %s"), *Plugin, bMounted ? TEXT("true") : TEXT("false"));
+}
+
+void UModLibrary::RegisterGameFeature(const FString& Path)
+{
+	GEngine->GetEngineSubsystem<UGameFeaturesSubsystem>()->LoadAndActivateGameFeaturePlugin(Path, FGameFeaturePluginLoadComplete());
+}
+
+void UModLibrary::AddPluginSearchPath(const FString& Path)
+{
+	IPluginManager::Get().AddPluginSearchPath(Path);
+}
+
+void UModLibrary::RefreshPlugins()
+{
+	IPluginManager::Get().RefreshPluginsList();
 }
 
 void UModLibrary::DebugPaks()

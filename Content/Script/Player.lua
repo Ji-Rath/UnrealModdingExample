@@ -1,3 +1,4 @@
+--[[
 actor = {}
 
 function actor:begin_play()
@@ -7,3 +8,4 @@ end
 
 function actor:tick(DeltaTime)
 end
+--]]
