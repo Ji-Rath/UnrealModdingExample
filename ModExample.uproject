@@ -19,10 +19,6 @@
 			]
 		},
 		{
-			"Name": "PakFileReader",
-			"Enabled": true
-		},
-		{
 			"Name": "GameFeatures",
 			"Enabled": true
 		}
