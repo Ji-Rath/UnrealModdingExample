@@ -1,0 +1,3 @@
+[submodule "Plugins/UEModManager"]
+	path = Plugins/UEModManager
+	url = https://github.com/Ji-Rath/UEModManager
