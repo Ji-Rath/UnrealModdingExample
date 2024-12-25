@@ -3,6 +3,7 @@
 
 #include "GameFeatureAction_AddLevel.h"
 
+#include "GameFeaturesSubsystem.h"
 #include "LevelManagerSubsystem.h"
 
 void UGameFeatureAction_AddLevel::HandleGameInstanceStart(UGameInstance* GameInstance)
@@ -14,13 +15,21 @@ void UGameFeatureAction_AddLevel::HandleGameInstanceStart(UGameInstance* GameIns
 	}
 }
 
-void UGameFeatureAction_AddLevel::OnGameFeatureRegistering()
+void UGameFeatureAction_AddLevel::OnGameFeatureActivating(FGameFeatureActivatingContext& Context)
 {
 	StartGameInstanceHandle = FWorldDelegates::OnStartGameInstance.AddUObject(this, 
 		&UGameFeatureAction_AddLevel::HandleGameInstanceStart);
+
+	for (const FWorldContext& WorldContext : GEngine->GetWorldContexts())
+	{
+		if (Context.ShouldApplyToWorldContext(WorldContext))
+		{
+			HandleGameInstanceStart(WorldContext.World()->GetGameInstance());
+		}
+	}
 }
 
-void UGameFeatureAction_AddLevel::OnGameFeatureUnregistering()
+void UGameFeatureAction_AddLevel::OnGameFeatureDeactivating(FGameFeatureDeactivatingContext& Context)
 {
 	FWorldDelegates::OnStartGameInstance.Remove(StartGameInstanceHandle);
 

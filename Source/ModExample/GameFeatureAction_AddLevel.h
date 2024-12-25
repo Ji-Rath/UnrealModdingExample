@@ -17,8 +17,8 @@ class MODEXAMPLE_API UGameFeatureAction_AddLevel : public UGameFeatureAction
 	GENERATED_BODY()
 
 	void HandleGameInstanceStart(UGameInstance* GameInstance);
-	virtual void OnGameFeatureRegistering() override;
-	virtual void OnGameFeatureUnregistering() override;
+	virtual void OnGameFeatureActivating(FGameFeatureActivatingContext& Context) override;
+	virtual void OnGameFeatureDeactivating(FGameFeatureDeactivatingContext& Context) override;
 
 public:
 	UPROPERTY(EditAnywhere)

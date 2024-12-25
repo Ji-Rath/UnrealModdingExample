@@ -36,6 +36,9 @@ class MODEXAMPLE_API UModLibrary : public UBlueprintFunctionLibrary
 
 	UFUNCTION(BlueprintCallable)
 	static void RegisterGameFeature(const FString& Path);
+
+	UFUNCTION(BlueprintCallable)
+	static void UnregisterGameFeature(const FString& Path);
 	
 	/**
 	 * Debug currently mounted pak files

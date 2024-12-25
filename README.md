@@ -24,10 +24,12 @@ Currently, if you have packaged a map into a .pak and already mounted it, you ca
 - When creating a SDK of your project, consider leaving key blueprint files in the content folder so that modders may use them. Even better if you just give them the whole project.
 - There are some specific settings you must follow when packaging (Both the mod and main game). Consider watching this video to ensure you are packaging correctly: https://www.youtube.com/watch?v=ndHNdUSRpho
 - SDK Project **needs** to have **Share Material Shader Code** set to false in order for materials to work properly.
+- Relevant classes: **UPluginManager, UGameFeaturesSubsystem, IFileManager, UPakFileSubsystem**
+
 # Planning
-- Experiment with game features plugin
+- ~~Experiment with game features plugin~~
 - Add examples which include spawning/replacing assets
-- Add UI to load/unload specific mods
+- ~~Add UI to load/unload specific mods~~
 
 # Research Notes
 

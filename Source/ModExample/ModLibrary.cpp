@@ -31,6 +31,11 @@ void UModLibrary::RegisterGameFeature(const FString& Path)
 	GEngine->GetEngineSubsystem<UGameFeaturesSubsystem>()->LoadAndActivateGameFeaturePlugin(Path, FGameFeaturePluginLoadComplete());
 }
 
+void UModLibrary::UnregisterGameFeature(const FString& Path)
+{
+	GEngine->GetEngineSubsystem<UGameFeaturesSubsystem>()->UnloadGameFeaturePlugin(Path, false);
+}
+
 void UModLibrary::AddPluginSearchPath(const FString& Path)
 {
 	IPluginManager::Get().AddPluginSearchPath(Path);
