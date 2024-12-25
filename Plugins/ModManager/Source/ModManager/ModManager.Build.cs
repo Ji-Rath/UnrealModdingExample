@@ -26,6 +26,7 @@ public class ModManager : ModuleRules
 			new string[]
 			{
 				"Core",
+				"PakFile"
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
@@ -37,7 +38,9 @@ public class ModManager : ModuleRules
 				"CoreUObject",
 				"Engine",
 				"Slate",
-				"SlateCore", "GameFeatures",
+				"SlateCore", 
+				"GameFeatures", 
+				"Projects"
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);

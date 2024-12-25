@@ -6,6 +6,8 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "ModManagerLibrary.generated.h"
 
+DECLARE_LOG_CATEGORY_EXTERN(LogModManagerLibrary, Log, All);
+
 class FPakPlatformFile;
 /**
  * 
@@ -40,7 +42,6 @@ public:
 	UFUNCTION(BlueprintCallable, meta=(WorldContext="WorldContext"), Category = "Mod Manager | Plugin File Modding")
 	static bool UnloadPlugin(UObject* WorldContext, const FString& Path, bool bIsGameFeature);
 protected:
-
+	static FString GetMountPoint(const FString& Path);
 	static FPakPlatformFile* GetOrAddPakPlatform();
-	static FPakPlatformFile* PakPlatformFile;
 };
